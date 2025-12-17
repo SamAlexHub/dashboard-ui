@@ -33,22 +33,27 @@ export default function InventoryPage() {
         fetchInventory();
     }, []);
 
+    // const fetchInventory = async () => {
+    //     try {
+    //         setIsLoading(true);
+    //         const res = await fetch('/api/inventory');
+    //         if (res.ok) {
+    //             const data = await res.json();
+    //             setItems(data);
+    //         } else {
+    //             console.error("Failed to fetch inventory");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching inventory:", error);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
     const fetchInventory = async () => {
-        try {
-            setIsLoading(true);
-            const res = await fetch('/api/inventory');
-            if (res.ok) {
-                const data = await res.json();
-                setItems(data);
-            } else {
-                console.error("Failed to fetch inventory");
-            }
-        } catch (error) {
-            console.error("Error fetching inventory:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+        console.log("API call disabled by request");
+        setIsLoading(false);
+    }
+
 
     // Filtering logic
     const filteredItems = items.filter(item => {
@@ -79,51 +84,54 @@ export default function InventoryPage() {
 
     const handleDelete = async (id: number) => {
         if (confirm("Are you sure you want to delete this item?")) {
-            try {
-                const res = await fetch(`/api/inventory/${id}`, { method: 'DELETE' });
-                if (res.ok) {
-                    setItems(items.filter(item => item.id !== id));
-                } else {
-                    alert("Failed to delete item");
-                }
-            } catch (e) {
-                console.error(e);
-                alert("Error deleting item");
-            }
+            // try {
+            //     const res = await fetch(`/api/inventory/${id}`, { method: 'DELETE' });
+            //     if (res.ok) {
+            //         setItems(items.filter(item => item.id !== id));
+            //     } else {
+            //         alert("Failed to delete item");
+            //     }
+            // } catch (e) {
+            //     console.error(e);
+            //     alert("Error deleting item");
+            // }
+            console.log("API call disabled by request");
         }
     };
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            if (editingItem) {
-                // Update
-                const res = await fetch(`/api/inventory/${editingItem.id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
-                });
-                if (res.ok) {
-                    const updatedItem = await res.json();
-                    setItems(items.map(item => item.id === editingItem.id ? updatedItem : item));
-                }
-            } else {
-                // Create
-                const res = await fetch('/api/inventory', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
-                });
-                if (res.ok) {
-                    const newItem = await res.json();
-                    setItems([newItem, ...items]);
-                }
-            }
-            closeModal();
-        } catch (e) {
-            console.error(e);
-            alert("Failed to save product");
-        }
+        // try {
+        //     if (editingItem) {
+        //         // Update
+        //         const res = await fetch(`/api/inventory/${editingItem.id}`, {
+        //             method: 'PUT',
+        //             headers: { 'Content-Type': 'application/json' },
+        //             body: JSON.stringify(formData),
+        //         });
+        //         if (res.ok) {
+        //             const updatedItem = await res.json();
+        //             setItems(items.map(item => item.id === editingItem.id ? updatedItem : item));
+        //         }
+        //     } else {
+        //         // Create
+        //         const res = await fetch('/api/inventory', {
+        //             method: 'POST',
+        //             headers: { 'Content-Type': 'application/json' },
+        //             body: JSON.stringify(formData),
+        //         });
+        //         if (res.ok) {
+        //             const newItem = await res.json();
+        //             setItems([newItem, ...items]);
+        //         }
+        //     }
+        //     closeModal();
+        // } catch (e) {
+        //     console.error(e);
+        //     alert("Failed to save product");
+        // }
+        console.log("API call disabled by request");
+        closeModal();
     };
 
     const closeModal = () => {
